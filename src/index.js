@@ -2,6 +2,8 @@ module.exports = function getZerosCount(number, base) {
   var zero = 0,
       r = 0,
       posMin = 0,
+      m = 0,
+      d = 0,
       Prost = [[2,0],[3,0],[5,0],[7,0],[11,0],[13,0],[17,0],[19,0],[23,0],
                 [29,0],[31,0],[37,0],[41,0],[43,0],[47,0],[53,0],[59,0],[61,0],
                 [67,0],[71,0],[73,0],[79,0],[83,0],[89,0],[97,0],[101,0],[103,0],
@@ -17,8 +19,8 @@ module.exports = function getZerosCount(number, base) {
         razloj = razloj / Prost[i][0];
         Prost[i][1]++; 
         break;
-      }
-    }
+      };
+    };
   }while (razloj > 1);
 
   for (i = 51; i >= 0; i--){
@@ -26,7 +28,7 @@ module.exports = function getZerosCount(number, base) {
       m = Prost[i][0];
       d = Prost[i][1];
       break;
-    }
+    };
   };
 
   for (var i = 1; i <= number; i++){
@@ -39,5 +41,7 @@ module.exports = function getZerosCount(number, base) {
       }
     } while( r == 0);
   };
-  return Math.floor(zero/d);
+
+  zero = Math.floor(zero/d);
+  return zero;
 }
