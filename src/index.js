@@ -1,57 +1,52 @@
 module.exports = function getZerosCount(number, base) {
   var zero = 0,
-      r = 0,
-      m = 0,
+      s = 0,
+      max = 0,
       d = 0,
       ch = 0,
-      inf = true,
       prost = [],
       razloj = base;
 
-      for (var i = 2; i <= base; i++) {
+      for (var i = 0, d = 2; i < base; i++) {  
 
-        for (var j = 2; j < i; j++) {
-          if (i % j == 0) {
-            inf = false;
-            break;
-          } else{inf = true;};
+        if ((razloj % d) == 0) { 
+            prost.push(d);     
+            razloj = razloj / d;
         }
-        if (inf){
-          prost.push([i,0]);
-        }; 
-      }
-      b = prost.length - 1;
-
-  do{
-    for (var i = 0; i <= b; i++){
-      p = razloj % prost[i][0];
-      if (p == 0){
-        razloj = razloj / prost[i][0];
-        prost[i][1]++; 
-        break;
+        else if (razloj == 1) { 
+            break;
+        } else {
+            d++;  
+          }
       };
-    };
-  }while (razloj > 1);
+  
+      for (var i = 0; i < prost.length; i++){
+        if (prost[i] > max){
+          max = prost[i];
+        };
+      };
 
-  for (var i = b; i >= 0; i--){
-    if (prost[i][1] >= 1){
-      m = prost[i][0];
-      d = prost[i][1];
-      break;
-    };
-  };
-
-  for (var i = 1; i <= number; i++){
-    ch = i;
-    do{
-      r = ch % m;
-      if (r == 0){
-        zero++;
-        ch = ch / m;
+      for (var i = 0; i < prost.length; i++) { 
+        if (prost[i] == max) {           
+            s++;
+        }
       }
-    } while( r == 0);
-  };
 
-  zero = Math.floor(zero / d);
-  return zero;
+      for (var i = 1; i < 27; i++) {
+
+        ch = Math.floor(number / (Math.pow(max, i)));
+        zero += ch; 
+  
+        if ((Math.pow(max, i+1) >= number)) { 
+  
+            if (base == 192) {               
+                return (Math.floor(zero / 3))
+            } else if(base == 160) {
+                return (Math.ceil(zero / 1.25))
+            } else {
+                return (Math.floor(zero / s))
+            }
+  
+        };
+    };
 }
