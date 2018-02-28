@@ -18,7 +18,7 @@ module.exports = function getZerosCount(number, base) {
         }
         if (inf){
           prost.push([i,0]);
-        }; // простое
+        }; 
       }
       b = prost.length - 1;
 
